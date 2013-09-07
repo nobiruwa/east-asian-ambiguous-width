@@ -195,7 +195,13 @@
 #x2480
 #x2481
 #x2482
+#x2483
+#x2484
+#x2485
+#x2486
 #x2487
+#x2488
+#x2489
 #x248A
 #x248B
 #x248C
@@ -984,6 +990,8 @@
 (dolist (range
          full-width-table)
   (set-char-table-range char-width-table range width))
-  (set-char-table-range char-width-table #x00AC 1))
+  (set-char-table-range char-width-table #x00AC 1)
+  ;; overwrite
+  (set-char-table-range char-width-table #x2010 1))
 (set-east-asian-ambiguous-width 2)
     
