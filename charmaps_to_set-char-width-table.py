@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
+#Usage: call this from create_el.sh
 import re
 import sys
 
@@ -48,6 +48,8 @@ with open("my-utf-8-eaw-fullwidth.el", 'w') as outfile:
 (dolist (range
          full-width-table)
   (set-char-table-range char-width-table range width))
-  (set-char-table-range char-width-table #x00AC 1))
+  (set-char-table-range char-width-table #x00AC 1)
+  ;; overwrite
+  (set-char-table-range char-width-table #x2010 1))
 (set-east-asian-ambiguous-width 2)
     """)
