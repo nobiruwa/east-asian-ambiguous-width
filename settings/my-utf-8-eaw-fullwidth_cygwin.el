@@ -69,7 +69,6 @@
   (dolist (range
            full-width-table)
     (set-char-table-range char-width-table range width))
-  (set-char-table-range char-width-table #x00AC 1)
-  (set-char-table-range char-width-table #x2010 1))
+  (set-char-table-range char-width-table #x00AC 1))
 (set-east-asian-ambiguous-width 2)
 
