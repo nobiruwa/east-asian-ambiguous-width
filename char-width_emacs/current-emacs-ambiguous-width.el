@@ -16,11 +16,12 @@
                       (insert (format "width-average: %f\n" (/ width-total count))))))
 
 
+;;minttyのソースsrc/newlib/libc/string/wcwidth.cにある
+;;ambiguous[]の{..., ...},という配列の中身をコピーし、
+;;ambiguous_buffer.txtとして保存してください。"
 (defun my-print-char-widths ()
-  "src/newlib/libc/string/wcwidth.cにある
-ambiguous[]の{..., ...},という配列の中身をコピーし、
-ambiguous_buffer.txtとして保存してください。"
-
+  "ambiguous_buffer.txtを読み込み各ユニコード文字のコードポイントからchar-widthの値を計算します。
+   計算結果はchar-width_emacs.txtに保存されます。"
   (if (bufferp (get-buffer "*char-width*")) 
       (kill-buffer "*char-width*"))
   (if (bufferp (get-buffer "*ambiguous*")) 
