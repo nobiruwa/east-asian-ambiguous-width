@@ -1,3 +1,7 @@
+
+;;; my-utf-8-eaw-fullwidth.el --- Summary: Set ambiguous characters width to 2.
+;;; Commentary:
+;;; Code:
 (set-language-environment "English")
 (defvar full-width-table
 '(
@@ -124,12 +128,14 @@
 (#x0001F130 . #x0001F169)
 (#x0001F170 . #x0001F19A)
 (#x000E0100 . #x000E01EF)))
-(defun set-east-asian-ambiguous-width (width)
-(dolist (range
-         full-width-table)
-  (set-char-table-range char-width-table range width))
+(defun set-east-asian-ambiguous-width (table width)
+  "Set character width for each character of TABLE to WIDTH."
+  (dolist (range table)
+    (set-char-table-range char-width-table range width))
   (set-char-table-range char-width-table #x00AC 1)
   ;; overwrite
   (set-char-table-range char-width-table #x2010 1))
-(set-east-asian-ambiguous-width 2)
-    
+(set-east-asian-ambiguous-width full-width-table 2)
+
+(provide 'my-utf-8-eaw-fullwidth)
+;;; my-utf-8-eaw-fullwidth.el ends here
