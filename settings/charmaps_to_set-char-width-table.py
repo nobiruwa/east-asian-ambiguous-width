@@ -36,12 +36,24 @@ for line in infile:   # readline()と等価、改行文字を含む
             elements.append(e)
 
 with open("my-utf-8-eaw-fullwidth.el", 'w') as outfile:
-    outfile.write("""
+    outfile.write("""\
 ;;; my-utf-8-eaw-fullwidth.el --- Summary: Set ambiguous characters width to 2.
 ;;; Commentary:
+;;; Before load this file, please configure *-coding-system like below:
+;;;    (set-language-environment "English") ;; call this explicity
+;;;    (prefer-coding-system 'utf-8)
+;;;    (set-default-coding-systems 'utf-8)
+;;;    (set-terminal-coding-system 'utf-8)
+;;;    (set-keyboard-coding-system 'utf-8)
+;;;    (set-buffer-file-coding-system 'utf-8-unix)
+;;;    (setq locale-coding-system 'utf-8)
+;;;    (setq file-name-coding-system 'utf-8)
+;;;    (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
+;;;    (if (eq system-type 'cygwin)
+;;;        (load "my-utf-8-eaw-fullwidth_cygwin")
+;;;        (load "my-utf-8-eaw-fullwidth"))
 ;;; Code:
 """)
-    outfile.write('(set-language-environment "English")\n')
     outfile.write("(defvar full-width-table\n")
     
     outfile.write("'(\n")  # start paren of list

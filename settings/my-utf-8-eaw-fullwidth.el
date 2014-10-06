@@ -1,8 +1,20 @@
-
 ;;; my-utf-8-eaw-fullwidth.el --- Summary: Set ambiguous characters width to 2.
 ;;; Commentary:
+;;; Before load this file, please call set-language-environment
+;;; and configure *-coding-system like below:
+;;;    (set-language-environment "English") ;; call this explicity
+;;;    (prefer-coding-system 'utf-8)
+;;;    (set-default-coding-systems 'utf-8)
+;;;    (set-terminal-coding-system 'utf-8)
+;;;    (set-keyboard-coding-system 'utf-8)
+;;;    (set-buffer-file-coding-system 'utf-8-unix)
+;;;    (setq locale-coding-system 'utf-8)
+;;;    (setq file-name-coding-system 'utf-8)
+;;;    (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
+;;;    (if (eq system-type 'cygwin)
+;;;        (load "my-utf-8-eaw-fullwidth_cygwin")
+;;;        (load "my-utf-8-eaw-fullwidth"))
 ;;; Code:
-(set-language-environment "English")
 (defvar full-width-table
 '(
 (#x1100 . #x115F)
