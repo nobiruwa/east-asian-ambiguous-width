@@ -1,14 +1,22 @@
 #!/bin/sh
 
+mkdir -p output
+
 echo Cモジュールのコンパイル
 make clean && make
+
 echo 'charmapsの<Uxxx>という文字列からxxxの部分を抽出します。'
-python3 ambiguous_to_ambiguous2.py > ambiguous2.txt
+python3 strip.py resources/ambiguous_charmaps.txt > output/ambiguous_chars.txt
+
 echo '各ユニコード文字のコードポイントに対するwcwidth()の値を計算します。'
-./display_wcwidth ambiguous2.txt > wcwidth.txt
+bin/display_wcwidth output/ambiguous_chars.txt > output/wcwidth.txt
+
 echo '各ユニコード文字のコードポイントに対するchar-widthの値を計算します。'
-emacs -Q -batch -l display_emacs_char-width.el "English" ambiguous2.txt > emacswidth.txt
+emacs -Q -batch -l display-emacs-char-width.el "English" output/ambiguous_chars.txt > output/emacswidth.txt
+
 echo '文字幅の計算結果をマージします。'
-join wcwidth.txt emacswidth.txt > width_joined.txt
+join output/wcwidth.txt output/emacswidth.txt > output/widthtable.txt
+
 echo '文字幅のテーブルを作成します。'
-python3 width_joined_to_html.py
+python3 htmlize.py output/widthtable.txt > output/widthtable.html
+cp resources/style.css output/

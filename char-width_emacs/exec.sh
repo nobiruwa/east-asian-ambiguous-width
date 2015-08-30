@@ -10,9 +10,11 @@ echo "ambiguous_buffer.txtとして保存しました。"
 echo ""
 echo "ambiguous_buffer.txtを読み込み各ユニコード文字のコードポイントからchar-widthの値を計算します。"
 echo "計算結果はoutput/char-width_emacs-default.txtに保存されます。"
+emacs -batch -l current-emacs-ambiguous-width.el resources/ambiguous_buffer.txt > output/char-width_emacs-default.txt
+
 echo "init.elをロードした後の計算結果はoutput/char-width_emacs-after-init-loaded.txtに保存されます。"
-emacs -batch -l current-emacs-ambiguous-width.el
+emacs -batch -l current-emacs-ambiguous-width.el --load-init resources/ambiguous_buffer.txt > output/char-width_emacs-after-init-loaded.txt
 echo "Rangeの行を取り除き、output/char-width-list_default-emacs.txtに保存します"
 grep -v "^Range" output/char-width_emacs-default.txt > output/char-width-list_default-emacs.txt
+echo ""
 echo "See: output/char-width-list_default-emacs.txt."
-

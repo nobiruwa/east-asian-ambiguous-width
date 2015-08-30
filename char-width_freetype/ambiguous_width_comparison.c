@@ -11,6 +11,10 @@
 #define HALF_WIDTH 1
 #define DOUBLE_WIDTH 2
 
+#if defined(__WIN32__) || defined(__linux__)
+extern int wcwidth(wchar_t c);
+#endif
+
 void print_face_detail(FT_Face face)
 {
     printf("face -> num_glyphs\t%ld\n", face->num_glyphs);

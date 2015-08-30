@@ -5,13 +5,6 @@
 ;;; Requires: cl
 ;;; Code:
 (require 'cl)
-(if (not (or (member "~/.emacs.d" load-path)
-             (member (expand-file-name "~/.emacs.d") load-path)))
-    (setq load-path (append (list "~/.emacs.d") load-path)))
-(if (not (or (member "~/.emacs.d/site-lisp" load-path)
-             (member (expand-file-name "~/.emacs.d/site-lisp") load-path)))
-    (setq load-path (append (list "~/.emacs.d/site-lisp") load-path)))
-(load "my-utf-8-eaw-fullwidth")
 
 (defun my-print-char-width (start-value end-value)
   "START-VALUEからEND-VALUEまでのコードポイント値に対するchar-widthをバッファ*char-width*に書き込みます。"
@@ -27,16 +20,16 @@
 
 ;;minttyのソースsrc/newlib/libc/string/wcwidth.cにある
 ;;ambiguous[]の{..., ...},という配列の中身をコピーし、
-;;ambiguous_buffer.txtとして保存してください。"
-(defun my-print-char-widths (filename)
-  "実行ディレクトリのambiguous_buffer.txtを読み込み各ユニコード文字のコードポイントからchar-widthの値を計算します。
-計算結果はFILENAMEに保存されます。"
+;;SOURCEで示すパスに保存してください。"
+(defun my-print-char-widths (source)
+  "ファイルSOURCEを読み込み各ユニコード文字のコードポイントからchar-widthの値を計算します。
+計算結果は標準出力に表示されます。"
   (if (bufferp (get-buffer "*char-width*"))
       (kill-buffer "*char-width*"))
   (if (bufferp (get-buffer "*ambiguous*"))
       (kill-buffer "*ambiguous*"))
   (with-current-buffer (get-buffer-create "*ambiguous*")
-    (insert-file-contents-literally "ambiguous_buffer.txt")
+    (insert-file-contents-literally source) ;; "ambiguous_buffer.txt"
     (goto-char 0)
     (let ((range nil)
           (start-hex-string nil)
@@ -53,11 +46,27 @@
               (end-number (string-to-number (replace-regexp-in-string "^0x" "" end-hex-string) 16)))
           (my-print-char-width start-number end-number)))))
   (with-current-buffer (get-buffer "*char-width*")
-    (write-region (point-min) (point-max) filename))
-  (message "See: %s." filename))
+    (princ (buffer-string))))
 
-(my-print-char-widths "output/char-width_emacs-default.txt")
-(load "init")
-(my-print-char-widths "output/char-width_emacs-after-init-loaded.txt")
+;; バッチモードでinit.elを読み込まないため、強制的にload-pathに追加する。
+(if (not (or (member "~/.emacs.d" load-path)
+             (member (expand-file-name "~/.emacs.d") load-path)))
+    (setq load-path (append (list "~/.emacs.d") load-path)))
+
+(if (not (or (member "~/.emacs.d/site-lisp" load-path)
+             (member (expand-file-name "~/.emacs.d/site-lisp") load-path)))
+    (setq load-path (append (list "~/.emacs.d/site-lisp") load-path)))
+
+(load "my-utf-8-eaw-fullwidth")
+
+(if (member "--load-init" argv)
+    (progn
+      (setq argv (remove "--load-init" argv))
+      (setq source (nth 0 argv))
+      (load "init")
+      (my-print-char-widths source))
+  (progn
+    (setq source (nth 0 argv))
+    (my-print-char-widths source)))
 
 ;;; current-emacs-ambiguous-width.el ends here

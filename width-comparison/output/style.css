@@ -6,8 +6,20 @@ table {
 th {
     border: solid 1px;
 }
+
+tr.gap {
+    background: #8ff;
+}
+
 td {
     border: solid 1px;
     padding-left: 2%;
     padding-right: 2%;
+}
+
+
+.char {
+    padding: 0;
+    margin: 0;
+    background: #eee;
 }

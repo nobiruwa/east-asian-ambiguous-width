@@ -2,7 +2,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <wchar.h>
 #define MAX 4096
+
+#if defined(__WIN32__) || defined(__linux__)
+extern int wcwidth(wchar_t c);
+#endif
 
 int main(int argc, char *argv[])
 {
@@ -16,8 +21,8 @@ int main(int argc, char *argv[])
 
     if (argc != 2)
     {
-        printf("Usage: ./ambiguous_width_comparison FONT_PATH\n");
-        printf("Example: ./ambiguous_width_comparison \"filename\"\n");
+        printf("Usage: ./display_wcwidth FONT_PATH\n");
+        printf("Example: ./display_wcwidth \"filename\"\n");
         exit(-1);
     }
     filename = argv[1];
