@@ -35,7 +35,7 @@ for line in infile:   # readline()と等価、改行文字を含む
             e = hex(codepoints[0])
             elements.append(e)
 
-with open("my-utf-8-eaw-fullwidth.el", 'w') as outfile:
+with open("output/my-utf-8-eaw-fullwidth.el", 'w') as outfile:
     outfile.write("""\
 ;;; my-utf-8-eaw-fullwidth.el --- Summary: Set ambiguous characters width to 2.
 ;;; Commentary:
