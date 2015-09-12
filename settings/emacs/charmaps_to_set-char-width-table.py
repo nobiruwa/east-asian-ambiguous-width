@@ -39,7 +39,8 @@ with open("output/my-utf-8-eaw-fullwidth.el", 'w') as outfile:
     outfile.write("""\
 ;;; my-utf-8-eaw-fullwidth.el --- Summary: Set ambiguous characters width to 2.
 ;;; Commentary:
-;;; Before load this file, please configure *-coding-system like below:
+;;; Before load this file, please call set-language-environment
+;;; and configure *-coding-system like below:
 ;;;    (set-language-environment "English") ;; call this explicity
 ;;;    (prefer-coding-system 'utf-8)
 ;;;    (set-default-coding-systems 'utf-8)
