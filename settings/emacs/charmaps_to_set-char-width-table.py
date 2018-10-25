@@ -56,7 +56,7 @@ with open("output/my-utf-8-eaw-fullwidth.el", 'w') as outfile:
 ;;; Code:
 """)
     outfile.write("(defvar full-width-table\n")
-    
+
     outfile.write("'(\n")  # start paren of list
     inner = "\n".join(elements)
     outfile.write(inner)
@@ -69,8 +69,9 @@ with open("output/my-utf-8-eaw-fullwidth.el", 'w') as outfile:
   "Set character width for each character of TABLE to WIDTH."
   (dolist (range table)
     (set-char-table-range char-width-table range width))
+  ;; NOT SIGN
   (set-char-table-range char-width-table #x00AC 1)
-  ;; overwrite
+  ;; HYPHEN
   (set-char-table-range char-width-table #x2010 1))
 (set-east-asian-ambiguous-width full-width-table 2)
 
