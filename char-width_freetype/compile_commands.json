@@ -1,0 +1,8 @@
+[
+  {
+    "directory": "/home/ein/repo/nobiruwa.github/east-asian-ambiguous-width.git/char-width_freetype/build",
+    "command": "cc -Ichar_width_freetype.p -I. -I.. -I/usr/include/freetype2 -I/usr/include/libpng16 -fdiagnostics-color=always -pipe -D_FILE_OFFSET_BITS=64 -Wall -Winvalid-pch -Wextra -Wpedantic -g -MD -MQ char_width_freetype.p/char_width_freetype.c.o -MF char_width_freetype.p/char_width_freetype.c.o.d -o char_width_freetype.p/char_width_freetype.c.o -c ../char_width_freetype.c",
+    "file": "../char_width_freetype.c",
+    "output": "char_width_freetype.p/char_width_freetype.c.o"
+  }
+]

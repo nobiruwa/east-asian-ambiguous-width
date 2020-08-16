@@ -20,3 +20,4 @@ join output/wcwidth.txt output/emacswidth.txt > output/widthtable.txt
 echo '文字幅のテーブルを作成します。'
 python3 htmlize.py output/widthtable.txt > output/widthtable.html
 cp resources/style.css output/
+cp resources/main.js output/
