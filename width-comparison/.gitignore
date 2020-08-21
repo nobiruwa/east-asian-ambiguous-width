@@ -7,3 +7,8 @@
 *.o
 *.so
 display_wcwidth
+
+# build directory
+bin
+# ccls
+.ccls-cache

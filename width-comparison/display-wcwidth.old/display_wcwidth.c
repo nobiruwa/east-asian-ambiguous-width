@@ -13,6 +13,7 @@ int main(int argc, char *argv[])
 {
     char * filename;
     int width_wc;
+    int i;
     int char_value;
     FILE *fp;
     char readline[MAX] = {'\0'};

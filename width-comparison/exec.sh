@@ -3,7 +3,8 @@
 mkdir -p output
 
 echo Cモジュールのコンパイル
-make clean && make
+# make clean && make
+meson setup bin --wipe && meson compile -C bin
 
 echo 'charmapsの<Uxxx>という文字列からxxxの部分を抽出します。'
 python3 strip.py resources/ambiguous_charmaps.txt > output/ambiguous_chars.txt
