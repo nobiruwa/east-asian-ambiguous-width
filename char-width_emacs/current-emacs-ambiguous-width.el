@@ -49,13 +49,13 @@
     (princ (buffer-string))))
 
 ;; バッチモードでinit.elを読み込まないため、強制的にload-pathに追加する。
-(if (not (or (member "~/.emacs.d" load-path)
-             (member (expand-file-name "~/.emacs.d") load-path)))
-    (setq load-path (append (list "~/.emacs.d") load-path)))
+(defun add-to-load-path (dir)
+  (if (not (or (member dir load-path)
+             (member dir load-path)))
+    (setq load-path (append (list dir) load-path))))
 
-(if (not (or (member "~/.emacs.d/site-lisp" load-path)
-             (member (expand-file-name "~/.emacs.d/site-lisp") load-path)))
-    (setq load-path (append (list "~/.emacs.d/site-lisp") load-path)))
+(add-to-load-path (expand-file-name user-emacs-directory))
+(add-to-load-path (expand-file-name "site-lisp" user-emacs-directory))
 
 (load "my-utf-8-eaw-fullwidth")
 
